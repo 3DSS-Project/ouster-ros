@@ -1,17 +1,17 @@
 <launch>
 
   <arg name="ouster_ns" default="ouster" doc="Override the default namespace of all ouster nodes"/>
-  <arg name="sensor_hostname" doc="hostname or IP in dotted decimal form of the sensor"/>
-  <arg name="udp_dest" default=" " doc="hostname or IP where the sensor will send data packets"/>
-  <arg name="lidar_port" default="0" doc="port to which the sensor should send lidar data"/>
-  <arg name="imu_port" default="0" doc="port to which the sensor should send imu data"/>
-  <arg name="udp_profile_lidar" default=" " doc="lidar packet profile; possible values: {
+  <arg name="sensor_hostname" default="os1-991949000607.local" doc="hostname or IP in dotted decimal form of the sensor"/>
+  <arg name="udp_dest" default="169.254.250.161" doc="hostname or IP where the sensor will send data packets"/>
+  <arg name="lidar_port" default="7502" doc="port to which the sensor should send lidar data"/>
+  <arg name="imu_port" default="7503" doc="port to which the sensor should send imu data"/>
+  <arg name="udp_profile_lidar" default="LEGACY" doc="lidar packet profile; possible values: {
     LEGACY,
     RNG19_RFL8_SIG16_NIR16_DUAL,
     RNG19_RFL8_SIG16_NIR16,
     RNG15_RFL8_NIR8
     }"/>
-  <arg name="lidar_mode" default=" " doc="resolution and rate; possible values: {
+  <arg name="lidar_mode" default="1024x10" doc="resolution and rate; possible values: {
     512x10,
     512x20,
     1024x10,
@@ -19,12 +19,15 @@
     2048x10,
     4096x5
     }"/>
-  <arg name="timestamp_mode" default=" " doc="method used to timestamp measurements; possible values: {
+  <arg name="timestamp_mode" default="TIME_FROM_ROS_TIME" doc="method used to timestamp measurements; possible values: {
     TIME_FROM_INTERNAL_OSC,
     TIME_FROM_SYNC_PULSE_IN,
     TIME_FROM_PTP_1588,
     TIME_FROM_ROS_TIME
     }"/>
+  <arg name="ptp_utc_tai_offset" default="-37.0"
+    doc="UTC/TAI offset in seconds to apply when using TIME_FROM_PTP_1588"/>
+
   <arg name="metadata" default=" " doc="path to write metadata file when receiving sensor data"/>
   <arg name="viz" default="true" doc="whether to run a rviz"/>
   <arg name="rviz_config" default="$(find ouster_ros)/config/viz.rviz" doc="optional rviz config file"/>
@@ -92,6 +95,7 @@
     <arg name="imu_frame" value="$(arg imu_frame)"/>
     <arg name="point_cloud_frame" value="$(arg point_cloud_frame)"/>
     <arg name="timestamp_mode" value="$(arg timestamp_mode)"/>
+    <arg name="ptp_utc_tai_offset" value="$(arg ptp_utc_tai_offset)"/>
     <arg name="_no_bond" value="$(arg _no_bond)"/>
     <arg name="dynamic_transforms_broadcast"
       value="$(arg dynamic_transforms_broadcast)"/>
