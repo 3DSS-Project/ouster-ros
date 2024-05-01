@@ -2,7 +2,7 @@
 
   <arg name="ouster_ns" default="ouster" doc="Override the default namespace of all ouster nodes"/>
   <arg name="sensor_hostname" default="os1-991949000607.local" doc="hostname or IP in dotted decimal form of the sensor"/>
-  <arg name="udp_dest" default="169.254.250.161" doc="hostname or IP where the sensor will send data packets"/>
+  <arg name="udp_dest" default="169.254.135.226" doc="hostname or IP where the sensor will send data packets"/>
   <arg name="lidar_port" default="7502" doc="port to which the sensor should send lidar data"/>
   <arg name="imu_port" default="7503" doc="port to which the sensor should send imu data"/>
   <arg name="udp_profile_lidar" default="LEGACY" doc="lidar packet profile; possible values: {
@@ -19,13 +19,13 @@
     2048x10,
     4096x5
     }"/>
-  <arg name="timestamp_mode" default="TIME_FROM_ROS_TIME" doc="method used to timestamp measurements; possible values: {
+  <arg name="timestamp_mode" default="TIME_FROM_PTP_1588" doc="method used to timestamp measurements; possible values: {
     TIME_FROM_INTERNAL_OSC,
     TIME_FROM_SYNC_PULSE_IN,
     TIME_FROM_PTP_1588,
     TIME_FROM_ROS_TIME
     }"/>
-  <arg name="ptp_utc_tai_offset" default="-37.0"
+  <arg name="ptp_utc_tai_offset" default="0.0"
     doc="UTC/TAI offset in seconds to apply when using TIME_FROM_PTP_1588"/>
 
   <arg name="metadata" default=" " doc="path to write metadata file when receiving sensor data"/>
